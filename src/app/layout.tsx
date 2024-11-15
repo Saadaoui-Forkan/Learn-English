@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Tajawal  } from 'next/font/google';
 import "./globals.css";
+import { AppProvider } from "@/context/AppContext";
 
 const tajawal = Tajawal ({
   subsets: ['arabic'],
@@ -28,7 +29,7 @@ export default function RootLayout({children}: Props) {
   return (
     <html lang="en">
       <body className={tajawal.className}>
-        {children}
+        <AppProvider>{children}</AppProvider>
       </body>
     </html>
   );

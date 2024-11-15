@@ -1,9 +1,12 @@
+import SideBar from "@/components/SideBar";
+import Toolbar from "@/components/ToolBar";
 
 
 export default function Home() {
   return (
     <div className="">
-      بسم الله الرحمان الرحيم
+      <Toolbar/>
+      <SideBar/>
     </div>
   );
 }
