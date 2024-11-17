@@ -3,6 +3,7 @@ import { AppContext } from "@/context/AppContext";
 import { lessons, listItemObj } from "@/utils/data";
 import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
+import Footer from "./Footer";
 
 const SideBar: React.FC = () => {
   const router = useRouter()
@@ -19,13 +20,14 @@ const SideBar: React.FC = () => {
 
   return (
     <div
-      className={`fixed top-12 w-64 bg-gray-100 h-screen p-2 transition-transform duration-500 ease-in-out 
-        transform overflow-y-auto ${
+      className={`fixed top-12 w-[20rem] bg-gray-100 p-2 transition-transform duration-500 ease-in-out 
+        transform overflow-y-auto min-h-screen z-10 ${
           openMobile ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0 md:block`}
     >
       <h2 className="text-xl font-bold mb-4">Lessons</h2>
-      <ul>
+      <div className="overflow-y-auto">
+      <ul className="">
         {lessons.map((lesson, index) => (
           <li key={index} className="mb-2">
            
@@ -62,6 +64,10 @@ const SideBar: React.FC = () => {
           </li>
         ))}
       </ul>
+      </div>
+      {/* <div className="absolute w-full bottom-10 left-0"> */}
+        <Footer/>
+      {/* </div> */}
     </div>
   );
 };
