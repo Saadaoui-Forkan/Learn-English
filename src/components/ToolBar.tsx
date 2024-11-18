@@ -14,7 +14,7 @@ const Toolbar = () => {
   const toggleMenu = () => setOpenMobile(!openMobile);
 
   return (
-    <header className="fixed top-0 left-0 w-full h-12 bg-slate-600 text-white">
+    <header className="fixed top-0 left-0 w-full h-12 bg-slate-100 text-slate-800">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
         <h1 className="text-xl font-bold">Learn English with AI</h1>
 
