@@ -1,3 +1,4 @@
+import { Message } from "@/utils/types";
 import { NextRequest, NextResponse } from "next/server";
 import OpenAi from "openai";
 
@@ -6,7 +7,7 @@ const openai = new OpenAi({
 });
 
 export async function POST(request: NextRequest) {
-  const req = await request.json();
+  const req = await request.json()
   try {
     if (!openai.apiKey) {
         return NextResponse.json(
@@ -16,7 +17,7 @@ export async function POST(request: NextRequest) {
     }
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
-      messages: [{ role: "system", content: req.message }],
+      messages:  req.messages,
     });
 
     return NextResponse.json(response.choices[0].message);
