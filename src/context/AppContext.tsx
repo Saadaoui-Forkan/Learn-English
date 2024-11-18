@@ -1,5 +1,6 @@
 'use client'
-import { createContext, ReactNode, useState } from "react";
+import { Message } from "@/utils/types";
+import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
 
 type Props = {
     children: ReactNode;
@@ -7,15 +8,28 @@ type Props = {
 
 type AppContextType = {
     openMobile: boolean,
-    setOpenMobile: (openMobile: boolean) => void,
+    setOpenMobile: Dispatch<SetStateAction<boolean>>,
+    messageValue: string,
+    setMessageValue: Dispatch<SetStateAction<string>>,
+    contextPreviousMessage: Message[],
+    setContextPreviousMessage: Dispatch<SetStateAction<Message[]>>,
 } 
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider = ({children}: Props) => {
     const [openMobile, setOpenMobile] = useState(false)
+    const [messageValue, setMessageValue] = useState("")
+    const [contextPreviousMessage, setContextPreviousMessage] = useState<Message[]>([])
     return (
-        <AppContext.Provider value={{ openMobile, setOpenMobile }}>
+        <AppContext.Provider value={{ 
+            openMobile, 
+            setOpenMobile, 
+            messageValue, 
+            setMessageValue, 
+            contextPreviousMessage, 
+            setContextPreviousMessage
+        }}>
             {children}
         </AppContext.Provider>
     )

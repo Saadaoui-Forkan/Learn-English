@@ -1,4 +1,3 @@
-import { Message } from "@/utils/types";
 import { NextRequest, NextResponse } from "next/server";
 import OpenAi from "openai";
 
@@ -19,7 +18,7 @@ export async function POST(request: NextRequest) {
       model: "gpt-3.5-turbo",
       messages:  req.messages,
     });
-
+    
     return NextResponse.json(response.choices[0].message);
   } catch (error) {
     console.error("Error during API call:", error);

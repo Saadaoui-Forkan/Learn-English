@@ -1,21 +1,24 @@
 "use client"
+import { AppContext } from '@/context/AppContext'
 import { getChatCompletion } from '@/controller/dataFetch'
-import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import React, { useContext, useState } from 'react'
 import { MdSend } from 'react-icons/md'
 
 const TextComposer = () => {
+    const router = useRouter()
     const [value, setValue] = useState("")
 
-    const getData = async() => {
-        const response = await getChatCompletion(
-            [
-                {
-                    role: "user",
-                    content: value
-                }
-            ]
-        )
-        console.log(response)
+    const context = useContext(AppContext);
+    if (!context) {
+        throw new Error("AppContext must be used within an AppProvider");
+    }
+    const { setMessageValue } = context
+
+    const handleChange = () => {
+        setMessageValue(value)
+        router.push('/')
+        setValue('')
     }
     return (
         <div className="w-11/12 mx-auto my-2 max-w-sm min-w-[200px]">
@@ -27,7 +30,7 @@ const TextComposer = () => {
                     value={value}
                     onChange={e => setValue(e.target.value)}
                 />
-                <MdSend className="absolute w-5 h-5 top-2.5 right-2.5 text-slate-600 cursor-pointer" onClick={getData}/>
+                <MdSend className="absolute w-5 h-5 top-2.5 right-2.5 text-slate-600 cursor-pointer" onClick={handleChange}/>
             </div>
         </div>
     )
