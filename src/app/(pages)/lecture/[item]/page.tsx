@@ -2,11 +2,13 @@
 import Spinner from '@/components/Spinner';
 import { AppContext } from '@/context/AppContext';
 import { getChatCompletion } from '@/controller/dataFetch';
-import { ApiResponse, Message, ParamsTypes } from '@/utils/types'
+import { ApiResponse, Message } from '@/utils/types'
+import { useParams } from 'next/navigation';
 import React, { useContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 
-const Lecture = ({ params }: ParamsTypes) => {
+const Lecture = () => {
+  const params = useParams<{ item: string }>()
   const context = useContext(AppContext);
   if (!context) {
     throw new Error("AppContext must be used within an AppProvider");
