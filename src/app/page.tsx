@@ -18,7 +18,6 @@ const Home = () => {
   const getAnswer = async () => {
     try {
       setLoading(true)
-      console.log(loading)
       const res = await getChatCompletion([
         ...contextPreviousMessage,
         {
@@ -39,7 +38,6 @@ const Home = () => {
         }
       ])
       setLoading(false)
-      console.log(loading)
     } catch (error) {
       console.error(error)
     } finally {

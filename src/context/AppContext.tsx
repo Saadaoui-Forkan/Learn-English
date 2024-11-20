@@ -1,25 +1,16 @@
 'use client'
-import { Message } from "@/utils/types";
-import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
-
-type Props = {
-    children: ReactNode;
-};
-
-type AppContextType = {
-    openMobile: boolean,
-    setOpenMobile: Dispatch<SetStateAction<boolean>>,
-    messageValue: string,
-    setMessageValue: Dispatch<SetStateAction<string>>,
-    contextPreviousMessage: Message[],
-    setContextPreviousMessage: Dispatch<SetStateAction<Message[]>>,
-} 
+import { AppContextType, Message, Props } from "@/utils/types";
+import { createContext, useState } from "react";
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider = ({children}: Props) => {
+    const [slug, setSlug] = useState("")
+    const [message, setMessage] = useState("")
     const [openMobile, setOpenMobile] = useState(false)
+    const [showFooterButton, setShowFooterButton] = useState(false)
     const [messageValue, setMessageValue] = useState("")
+    const [textButton, setTextButton] = useState("")
     const [contextPreviousMessage, setContextPreviousMessage] = useState<Message[]>([])
     return (
         <AppContext.Provider value={{ 
@@ -28,7 +19,15 @@ export const AppProvider = ({children}: Props) => {
             messageValue, 
             setMessageValue, 
             contextPreviousMessage, 
-            setContextPreviousMessage
+            setContextPreviousMessage,
+            textButton,
+            setTextButton,
+            showFooterButton,
+            setShowFooterButton,
+            slug,
+            setSlug,
+            message,
+            setMessage,
         }}>
             {children}
         </AppContext.Provider>
