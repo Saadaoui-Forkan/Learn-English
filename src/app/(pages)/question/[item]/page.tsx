@@ -14,9 +14,6 @@ const Question = () => {
   if (!context) {
     throw new Error("AppContext must be used within an AppProvider");
   }
-
-  const [ answersArray, setAnswersArray ] = useState<string[]>([])
-  const [ question, setQuestion ] = useState("")
   
   const {
     loading,
@@ -48,7 +45,7 @@ const Question = () => {
     ])
     checkResponse(res)
     setShowFooterButton(true)
-    setTextButton("Give me other question")
+    setTextButton("Find Answer")
     setLoading(false)
   }
   const checkResponse = (res: ApiResponse) => {
@@ -67,15 +64,13 @@ const Question = () => {
     }
   }
 
-  const getMoreData = async () => {
+  const getAnswer = async () => {
     setShowFooterButton(false);
     const res: ApiResponse = await getChatCompletion([
       ...contextPreviousMessage,
       {
         role: "user",
-        content: `Please give me another multiple-choice question exercise in the same context as before. 
-        The question should be related to ${params.item}, suitable for an A2 English language learner. 
-        Ensure it is different from the previous question. Put each answer on a separate line, starting with capital letters A), B), C), and D).`,
+        content: `Please provide the correct answer to the last question. Explain why it is the correct choice in simple English, suitable for an A2 learner.`,
       },
     ]);
     if (res.status === 200) {
@@ -93,20 +88,10 @@ const Question = () => {
     }
   };
 
-  const questionRegex = (message: string) => {
-    const regex = /([A-Ea-e]\) | [A-Ea-e]\.)(.*)/g;
-    const answerArray = message.match(regex) || []
-    const firstLine = message.split("\n")[0]
-    setAnswersArray(answerArray)
-    setQuestion(firstLine)
-    setMessage(message)
-}
-
   useEffect(() => {
     getQuestion()
   }, [])
 
-  console.log(question)
   return (
     <>
       {loading ? (
@@ -121,7 +106,7 @@ const Question = () => {
 
           {showFooterButton && (
             <Button 
-              onClick={getMoreData}
+              onClick={getAnswer}
               textButton={textButton}
             />
           )}
