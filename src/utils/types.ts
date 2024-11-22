@@ -37,4 +37,8 @@ export type AppContextType = {
     setSlug: Dispatch<SetStateAction<string>>,
     message: string,
     setMessage: Dispatch<SetStateAction<string>>,
+    loading: boolean,
+    setLoading: Dispatch<SetStateAction<boolean>>,
+    promptContent: string,
+    setPromptContent: Dispatch<SetStateAction<string>>
 } 

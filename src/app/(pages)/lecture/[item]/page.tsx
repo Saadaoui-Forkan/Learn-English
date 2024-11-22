@@ -1,4 +1,5 @@
 "use client"
+import Button from '@/components/Button';
 import Spinner from '@/components/Spinner';
 import { AppContext } from '@/context/AppContext';
 import { getChatCompletion } from '@/controller/dataFetch';
@@ -21,7 +22,9 @@ const Lecture = () => {
     setContextPreviousMessage,
     message,
     setMessage,
-    slug
+    slug,
+    textButton,
+    showFooterButton
   } = context;
 
   const [loading, setLoading] = useState(false)
@@ -34,6 +37,7 @@ const Lecture = () => {
 
   const getLecture = async () => {
     setLoading(true)
+    setShowFooterButton(false)
     const res = await getChatCompletion([
       prompt
     ])
@@ -59,24 +63,53 @@ const Lecture = () => {
     }
   }
 
+  const getMoreData = async () => {
+    setShowFooterButton(false);
+    const res: ApiResponse = await getChatCompletion([
+      ...contextPreviousMessage,
+      {
+        role: "user",
+        content: `give me more explanation about ${slug}`,
+      },
+    ]);
+    if (res.status === 200) {
+      setMessage(res.data.content);
+      setContextPreviousMessage([
+        ...contextPreviousMessage,
+        prompt,
+        {
+          role: res.data.role,
+          content: res.data.content,
+        },
+      ]);
+    } else {
+      toast.error(res.data.error);
+    }
+  };
+
   useEffect(() => {
     getLecture()
   }, [])
   return (
     <>
-      {
-        loading ? (
-          <Spinner />
-        ) : (
-          <div className="text-gray-800 rounded-md overflow-y-auto text-lg">
-            {message.split(/\n/).map((line, index) => (
-              <p key={index}>{line}</p>
-            ))}
-          </div>
-        )
-      }
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className="text-gray-800 rounded-md overflow-y-auto text-lg">
+          {message.split(/\n/).map((line, index) => (
+            <p key={index}>{line}</p>
+          ))}
+
+          {showFooterButton && (
+            <Button 
+              onClick={getMoreData}
+              textButton={textButton}
+            />
+          )}
+        </div>
+      )}
     </>
-  )
+  );
 }
 
 export default Lecture

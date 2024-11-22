@@ -5,6 +5,8 @@ import { createContext, useState } from "react";
 export const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider = ({children}: Props) => {
+    const [promptContent, setPromptContent] = useState("")
+    const [loading, setLoading] = useState(false)
     const [slug, setSlug] = useState("")
     const [message, setMessage] = useState("")
     const [openMobile, setOpenMobile] = useState(false)
@@ -28,6 +30,10 @@ export const AppProvider = ({children}: Props) => {
             setSlug,
             message,
             setMessage,
+            loading,
+            setLoading,
+            promptContent,
+            setPromptContent,
         }}>
             {children}
         </AppContext.Provider>
