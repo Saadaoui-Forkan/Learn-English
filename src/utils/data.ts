@@ -1,4 +1,4 @@
-export const listItemObj: string[] = ["lecture", "question", "conversation", "translate"];
+export const listItemObj: string[] = ["lecture", "question", "conversation"];
 
 export const lessons: string[]  = [
   "Simple-present",

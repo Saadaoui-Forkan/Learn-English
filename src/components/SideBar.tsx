@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
 import Footer from "./Footer";
 import { IoChevronDown, IoChevronUpSharp } from "react-icons/io5";
-import { FaCheck } from "react-icons/fa";
 import { GiCheckMark } from "react-icons/gi";
 
 const SideBar: React.FC = () => {
