@@ -1,6 +1,4 @@
-# Learn English
-
-## Project Introduction  
+# Learn English 
 💡 **Learn languages easily with modern technology!**  
 Application for learning languages using **Next.js** and **AI technologies**, combining simplicity and advanced tools to help you develop your language skills in an enjoyable way.
 
