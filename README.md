@@ -2,7 +2,7 @@
 
 ## Project Introduction  
 💡 **Learn languages easily with modern technology!**  
-I am excited to share this application for learning languages using **Next.js** and **AI technologies**, combining simplicity and advanced tools to help you develop your language skills in an enjoyable way.
+Application for learning languages using **Next.js** and **AI technologies**, combining simplicity and advanced tools to help you develop your language skills in an enjoyable way.
 
 ---
 
